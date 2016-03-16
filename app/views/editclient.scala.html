@@ -1,0 +1,55 @@
+@(clientForm: models.Client)
+
+@import helper._
+
+@import common._
+
+@mainLayout(title = "Edit Client") {
+
+
+<div class="container">
+
+
+        <h1>Edit Client</h1>
+
+
+        @helper.form(action = routes.Clients.update(clientForm.id)) {
+        <input type="hidden" name="id" id="id" value="@clientForm.id">
+
+    <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">Name</label>
+            <div class="col-sm-10">
+                <input name="name" id="name" size="50" value="@clientForm.name">
+            </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="birth" class="col-sm-2 control-label">Birth</label>
+            <div class="col-sm-10">
+                 <input name="birth" id="birth" size="10" value="@clientForm.birth">
+            </div>
+        </div>
+
+
+
+    <div class="form-group">
+            <label for="email" class="col-sm-2 control-label">E-mail</label>
+            <div class="col-sm-10">
+             <input name="email" id="email" size="50" value="@clientForm.email">
+                </div>
+        </div>
+
+
+
+
+
+    <button type="submit" class="btn btn-primary">Update Client</button>
+
+        }
+
+
+</div>
+
+
+}

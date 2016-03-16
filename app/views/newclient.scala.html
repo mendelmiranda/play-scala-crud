@@ -1,0 +1,40 @@
+@(clientForm: Form[(String,java.util.Date,String)])(implicit messages: Messages, flash: Flash, lang: Lang)
+
+@import helper._
+
+@import common._
+
+@mainLayout(title = "New Client") {
+
+@if(clientForm.hasGlobalErrors) {
+<ul>
+    @for(error <- clientForm.globalErrors) {
+    <li>@error.message</li>
+    }
+</ul>
+}
+
+
+<div class="container">
+
+    <div class="row">
+
+        <h1>New Client</h1>
+
+        @helper.form(action = routes.Clients.create()) {
+
+        <div class="control-group">
+
+        @inputText(clientForm("name"), '_label -> "Name: ", '_class -> "form-group", 'size -> 60)
+        @inputText(clientForm("birth"), '_label -> "Birth.: ", '_class -> "form-group")
+        @inputText(clientForm("email"), '_label -> "E-mail: ", '_class -> "form-group", 'size -> 60)
+
+            <button type="submit" class="btn btn-primary">Save Client</button>
+            <br />
+        </div>
+        }
+    </div>
+</div>
+
+
+}

@@ -1,0 +1,57 @@
+@( clients: Seq[Client],clientForm: Form[(String,java.util.Date,String)])(implicit flash: Flash, request: play.api.mvc.Request[Any])
+
+@import java.text.SimpleDateFormat
+
+@import common._
+@import helper._
+@import java.text.SimpleDateFormat
+
+@mainLayout(title = "Simple CRUD") {
+
+
+<div class="container">
+
+    @if(flash.get("success").isDefined){
+    <div class="alert alert-success">
+        @flash.get("success")
+    </div> }
+    @if(flash.get("error").isDefined){
+    <div class="alert alert-error">
+        @flash.get("error")
+    </div>
+    }
+
+
+
+    <table class="table table-hover" style="width:540px; height: 100%;">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+            <th>Birthday</th>
+            <th>E-mail</th>
+            <th></th>
+
+        </tr>
+        </thead>
+        <tbody>
+        @for(client <- clients){
+        <tr>
+            <td>@client.name</td>
+            <td>@(new SimpleDateFormat("dd/MM/yyyy").format(client.birth))</td>
+            <td>
+                <label>@Html(client.email)</label>
+            </td>
+            <td>
+                <a href="@routes.Clients.edit(client.id)"><i class="glyphicon glyphicon-pencil"></i></a>
+                @form(routes.Clients.delete(client.id)) {
+                <button type="submit" class="btn btn-link" onclick="return confirm('Are you sure?');"><i class="glyphicon glyphicon-trash"></i></button>
+                }
+            </td>
+        </tr>
+        }
+    </table>
+</div>
+
+
+}
